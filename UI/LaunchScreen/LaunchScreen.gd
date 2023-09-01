@@ -199,7 +199,7 @@ func tryToPopulateFilesList():
 	if(selectedEntry == null):
 		return ""
 	var zipToLoad = selectedEntry["path"]
-	if(zipToLoad.get_file() == "BDCC.pck"):
+	if(zipToLoad.get_file() == "BDCC-NSMOD.pck"):
 		return "This file is required for mods to function on Android version. On other platforms this file is Not required and will be disabled automatically"
 	
 	var gdunzip = GDUnzip.new()
@@ -243,7 +243,7 @@ func tryToPopulateFilesList():
 func _on_ModDisableButton_pressed():
 	if(selectedEntry == null):
 		return
-	if(selectedEntry["name"] == "BDCC.pck"):
+	if(selectedEntry["name"] == "BDCC-NSMOD.pck"):
 		return
 	
 	selectedEntry["disabled"] = !selectedEntry["disabled"]
@@ -253,7 +253,7 @@ func _on_ModDisableButton_pressed():
 func _on_MoveUpButton_pressed():
 	if(selectedEntry == null):
 		return
-	if(selectedEntry["name"] == "BDCC.pck"):
+	if(selectedEntry["name"] == "BDCC-NSMOD.pck"):
 		return
 	
 	var currentIndex = currentModOrder.find(selectedEntry)
@@ -270,7 +270,7 @@ func _on_MoveUpButton_pressed():
 func _on_MoveDownButton_pressed():
 	if(selectedEntry == null):
 		return
-	if(selectedEntry["name"] == "BDCC.pck"):
+	if(selectedEntry["name"] == "BDCC-NSMOD.pck"):
 		return
 	
 	var currentIndex = currentModOrder.find(selectedEntry)
@@ -284,7 +284,7 @@ func _on_MoveDownButton_pressed():
 
 func ensureBDCCIsFirst():
 	for _i in range(currentModOrder.size()):
-		if(currentModOrder[_i]["name"] == "BDCC.pck"):
+		if(currentModOrder[_i]["name"] == "BDCC-NSMOD.pck"):
 			var entry = currentModOrder[_i]
 			if(OS.get_name() != "Android"):
 				entry["disabled"] = true
@@ -330,7 +330,7 @@ func generateBDCCpckFile():
 	
 	var modsFolder = GlobalRegistry.getModsFolder()
 	
-	packer.pck_start(modsFolder.plus_file("BDCC.pck"))
+	packer.pck_start(modsFolder.plus_file("BDCC-NSMOD.pck"))
 	
 	
 	fillFolder(packer, "res://")

@@ -46,14 +46,67 @@ var advancedShadersEnabled = true
 
 var autosaveEnabled = true
 
-# Cum Production Mod
+# Cum Production Modification
 var cumProductionModEnabled = false
 var capacityBallsRatio = 1.0
 var capacityPenisRatio = 0.25
 var capacityModifier = 1.0
 var productionModifier = 2.0
 
-# Alien Infestation Mod
+# DynamicNPC Generator Modification
+var dynamicNPCGeneratorModEnabled = false
+var dynamicNPCGeneratorSettings = {
+	NpcGender.Male: {
+		"thickMin": 0.0,
+		"thickMax": 100.0,
+		"femMin": 0.0,
+		"femMax": 100.0,
+		"lenCMMin": 15.0,
+		"lenCMMax": 20.0,
+		"ballsScaleMin": 1.0,
+		"ballsScaleMax": 2.0,
+	},
+	NpcGender.Female: {
+		"thickMin": 0.0,
+		"thickMax": 100.0,
+		"femMin": 0.0,
+		"femMax": 100.0,
+		"breastsMin": 3,
+		"breastsMax": 7,
+	},
+	NpcGender.Herm: {
+		"thickMin": 0.0,
+		"thickMax": 100.0,
+		"femMin": 0.0,
+		"femMax": 100.0,
+		"lenCMMin": 15.0,
+		"lenCMMax": 20.0,
+		"ballsScaleMin": 1.0,
+		"ballsScaleMax": 2.0,
+		"breastsMin": 3,
+		"breastsMax": 7,
+	},
+	NpcGender.Shemale: {
+		"thickMin": 0.0,
+		"thickMax": 100.0,
+		"femMin": 0.0,
+		"femMax": 100.0,
+		"lenCMMin": 15.0,
+		"lenCMMax": 20.0,
+		"ballsScaleMin": 1.0,
+		"ballsScaleMax": 2.0,
+		"breastsMin": 3,
+		"breastsMax": 7,
+	},
+	NpcGender.Peachboy: {
+		"thickMin": 0.0,
+		"thickMax": 100.0,
+		"femMin": 0.0,
+		"femMax": 100.0,
+	},
+}
+
+# Alien Infestation Modification
 var alienInfestationModEnabled = false
 var alienParasitesEnabled = false
 
@@ -93,6 +146,57 @@ func resetToDefaults():
 	capacityPenisRatio = 0.25
 	capacityModifier = 1.0
 	productionModifier = 2.0
+	dynamicNPCGeneratorModEnabled = false
+	dynamicNPCGeneratorSettings = {
+		NpcGender.Male: {
+			"thickMin": 0.0,
+			"thickMax": 100.0,
+			"femMin": 0.0,
+			"femMax": 100.0,
+			"lenCMMin": 15.0,
+			"lenCMMax": 20.0,
+			"ballsScaleMin": 1.0,
+			"ballsScaleMax": 2.0,
+		},
+		NpcGender.Female: {
+			"thickMin": 0.0,
+			"thickMax": 100.0,
+			"femMin": 0.0,
+			"femMax": 100.0,
+			"breastsMin": 3,
+			"breastsMax": 7,
+		},
+		NpcGender.Herm: {
+			"thickMin": 0.0,
+			"thickMax": 100.0,
+			"femMin": 0.0,
+			"femMax": 100.0,
+			"lenCMMin": 15.0,
+			"lenCMMax": 20.0,
+			"ballsScaleMin": 1.0,
+			"ballsScaleMax": 2.0,
+			"breastsMin": 3,
+			"breastsMax": 7,
+		},
+		NpcGender.Shemale: {
+			"thickMin": 0.0,
+			"thickMax": 100.0,
+			"femMin": 0.0,
+			"femMax": 100.0,
+			"lenCMMin": 15.0,
+			"lenCMMax": 20.0,
+			"ballsScaleMin": 1.0,
+			"ballsScaleMax": 2.0,
+			"breastsMin": 3,
+			"breastsMax": 7,
+		},
+		NpcGender.Peachboy: {
+			"thickMin": 0.0,
+			"thickMax": 100.0,
+			"femMin": 0.0,
+			"femMax": 100.0,
+		},
+	}
 	alienInfestationModEnabled = false
 	alienParasitesEnabled = false
 	
@@ -211,6 +315,12 @@ func getCapacityModifier():
 
 func getProductionModifier():
 	return productionModifier
+
+func getDynamicNPCGeneratorModEnabled():
+	return dynamicNPCGeneratorModEnabled
+
+func getDynamicNPCGeneratorSettings():
+	return dynamicNPCGeneratorSettings
 
 func getAlienInfestationModEnabled():
 	return alienInfestationModEnabled
@@ -607,6 +717,73 @@ func getModChangeableOptions():
 			]
 		},
 		{
+			"name": "Dynamic NPC generator settings",
+			"id": "dynamicNPCGeneratorSettings",
+			"options": [
+				{
+					"name": "Enable",
+					"description": "Enable this modification",
+					"id": "dynamicNPCGeneratorModEnabled",
+					"type": "checkbox",
+					"value": dynamicNPCGeneratorModEnabled,
+				},
+				{
+					"name": "Thickness",
+					"description": "Change the thickness of dynamic npcs\nGenders: Male, Female, Herm, Shemale, Peachboy\nEach gender must have a specified range of numbers",
+					"id": "dynamicNPCGeneratorSettingsThick",
+					"type": "text",
+					"value": (
+						str(dynamicNPCGeneratorSettings[NpcGender.Male]["thickMin"]) + ":" + str(dynamicNPCGeneratorSettings[NpcGender.Male]["thickMax"]) + " " +
+						str(dynamicNPCGeneratorSettings[NpcGender.Female]["thickMin"]) + ":" + str(dynamicNPCGeneratorSettings[NpcGender.Female]["thickMax"]) + " " +
+						str(dynamicNPCGeneratorSettings[NpcGender.Herm]["thickMin"]) + ":" + str(dynamicNPCGeneratorSettings[NpcGender.Herm]["thickMax"]) + " " +
+						str(dynamicNPCGeneratorSettings[NpcGender.Shemale]["thickMin"]) + ":" + str(dynamicNPCGeneratorSettings[NpcGender.Shemale]["thickMax"]) + " " +
+						str(dynamicNPCGeneratorSettings[NpcGender.Peachboy]["thickMin"]) + ":" + str(dynamicNPCGeneratorSettings[NpcGender.Peachboy]["thickMax"]) + " "),
+				},
+				{
+					"name": "Femininity",
+					"description": "Change the femininity of dynamic npcs\nGenders: Male, Female, Herm, Shemale, Peachboy\nEach gender must have a specified range of numbers",
+					"id": "dynamicNPCGeneratorSettingsFem",
+					"type": "text",
+					"value": (
+						str(dynamicNPCGeneratorSettings[NpcGender.Male]["femMin"]) + ":" + str(dynamicNPCGeneratorSettings[NpcGender.Male]["femMax"]) + " " +
+						str(dynamicNPCGeneratorSettings[NpcGender.Female]["femMin"]) + ":" + str(dynamicNPCGeneratorSettings[NpcGender.Female]["femMax"]) + " " +
+						str(dynamicNPCGeneratorSettings[NpcGender.Herm]["femMin"]) + ":" + str(dynamicNPCGeneratorSettings[NpcGender.Herm]["femMax"]) + " " +
+						str(dynamicNPCGeneratorSettings[NpcGender.Shemale]["femMin"]) + ":" + str(dynamicNPCGeneratorSettings[NpcGender.Shemale]["femMax"]) + " " +
+						str(dynamicNPCGeneratorSettings[NpcGender.Peachboy]["femMin"]) + ":" + str(dynamicNPCGeneratorSettings[NpcGender.Peachboy]["femMax"]) + " "),
+				},
+				{
+					"name": "Penis length",
+					"description": "Change the penis length of dynamic npcs\nGenders: Male, Herm, Shemale\nEach gender must have a specified range of numbers",
+					"id": "dynamicNPCGeneratorSettingsLenCM",
+					"type": "text",
+					"value": (
+						str(dynamicNPCGeneratorSettings[NpcGender.Male]["lenCMMin"]) + ":" + str(dynamicNPCGeneratorSettings[NpcGender.Male]["lenCMMax"]) + " " +
+						str(dynamicNPCGeneratorSettings[NpcGender.Herm]["lenCMMin"]) + ":" + str(dynamicNPCGeneratorSettings[NpcGender.Herm]["lenCMMax"]) + " " +
+						str(dynamicNPCGeneratorSettings[NpcGender.Shemale]["lenCMMin"]) + ":" + str(dynamicNPCGeneratorSettings[NpcGender.Shemale]["lenCMMax"]) + " "),
+				},
+				{
+					"name": "Balls scale",
+					"description": "Change the balls scale of dynamic npcs\nGenders: Male, Herm, Shemale\nEach gender must have a specified range of numbers",
+					"id": "dynamicNPCGeneratorSettingsBallsScale",
+					"type": "text",
+					"value": (
+						str(dynamicNPCGeneratorSettings[NpcGender.Male]["ballsScaleMin"]) + ":" + str(dynamicNPCGeneratorSettings[NpcGender.Male]["ballsScaleMax"]) + " " +
+						str(dynamicNPCGeneratorSettings[NpcGender.Herm]["ballsScaleMin"]) + ":" + str(dynamicNPCGeneratorSettings[NpcGender.Herm]["ballsScaleMax"]) + " " +
+						str(dynamicNPCGeneratorSettings[NpcGender.Shemale]["ballsScaleMin"]) + ":" + str(dynamicNPCGeneratorSettings[NpcGender.Shemale]["ballsScaleMax"]) + " "),
+				},
+				{
+					"name": "Breasts size",
+					"description": "Change the balls scale of dynamic npcs\nGenders: Female, Herm, Shemale\nEach gender must have a specified range of numbers",
+					"id": "dynamicNPCGeneratorSettingsBreasts",
+					"type": "text",
+					"value": (
+						str(dynamicNPCGeneratorSettings[NpcGender.Female]["breastsMin"]) + ":" + str(dynamicNPCGeneratorSettings[NpcGender.Female]["breastsMax"]) + " " +
+						str(dynamicNPCGeneratorSettings[NpcGender.Herm]["breastsMin"]) + ":" + str(dynamicNPCGeneratorSettings[NpcGender.Herm]["breastsMax"]) + " " +
+						str(dynamicNPCGeneratorSettings[NpcGender.Shemale]["breastsMin"]) + ":" + str(dynamicNPCGeneratorSettings[NpcGender.Shemale]["breastsMax"]) + " "),
+				},
+			]
+		},
+		{
 			"name": "Alien infestation settings (W.I.P.)",
 			"id": "alienInfestationSettings",
 			"options": [
@@ -733,6 +910,66 @@ func applyOption(categoryID, optionID, value):
 		if(optionID == "productionModifier"):
 			productionModifier = value
 
+	if(categoryID == "dynamicNPCGeneratorSettings"):
+		if(optionID == "dynamicNPCGeneratorModEnabled"):
+			dynamicNPCGeneratorModEnabled = value
+			return
+
+		var value_parsed = []
+		var splits = value.split(" ", false, 0)
+	
+		for gender in splits:
+			value_parsed.push_back(float(gender.split(":")[0]))
+			value_parsed.push_back(float(gender.split(":")[1]))
+		
+		if(optionID == "dynamicNPCGeneratorSettingsThick"):
+			dynamicNPCGeneratorSettings[NpcGender.Male]["thickMin"] = value_parsed[0]
+			dynamicNPCGeneratorSettings[NpcGender.Male]["thickMax"] = value_parsed[1]
+			dynamicNPCGeneratorSettings[NpcGender.Female]["thickMin"] = value_parsed[2]
+			dynamicNPCGeneratorSettings[NpcGender.Female]["thickMax"] = value_parsed[3]
+			dynamicNPCGeneratorSettings[NpcGender.Herm]["thickMin"] = value_parsed[4]
+			dynamicNPCGeneratorSettings[NpcGender.Herm]["thickMax"] = value_parsed[5]
+			dynamicNPCGeneratorSettings[NpcGender.Shemale]["thickMin"] = value_parsed[6]
+			dynamicNPCGeneratorSettings[NpcGender.Shemale]["thickMax"] = value_parsed[7]
+			dynamicNPCGeneratorSettings[NpcGender.Peachboy]["thickMin"] = value_parsed[8]
+			dynamicNPCGeneratorSettings[NpcGender.Peachboy]["thickMax"] = value_parsed[9]
+
+		if(optionID == "dynamicNPCGeneratorSettingsFem"):
+			dynamicNPCGeneratorSettings[NpcGender.Male]["femMin"] = value_parsed[0]
+			dynamicNPCGeneratorSettings[NpcGender.Male]["femMax"] = value_parsed[1]
+			dynamicNPCGeneratorSettings[NpcGender.Female]["femMin"] = value_parsed[2]
+			dynamicNPCGeneratorSettings[NpcGender.Female]["femMax"] = value_parsed[3]
+			dynamicNPCGeneratorSettings[NpcGender.Herm]["femMin"] = value_parsed[4]
+			dynamicNPCGeneratorSettings[NpcGender.Herm]["femMax"] = value_parsed[5]
+			dynamicNPCGeneratorSettings[NpcGender.Shemale]["femMin"] = value_parsed[6]
+			dynamicNPCGeneratorSettings[NpcGender.Shemale]["femMax"] = value_parsed[7]
+			dynamicNPCGeneratorSettings[NpcGender.Peachboy]["femMin"] = value_parsed[8]
+			dynamicNPCGeneratorSettings[NpcGender.Peachboy]["femMax"] = value_parsed[9]
+
+		if(optionID == "dynamicNPCGeneratorSettingsLenCM"):
+			dynamicNPCGeneratorSettings[NpcGender.Male]["lenCMMin"] = value_parsed[0]
+			dynamicNPCGeneratorSettings[NpcGender.Male]["lenCMMax"] = value_parsed[1]
+			dynamicNPCGeneratorSettings[NpcGender.Herm]["lenCMMin"] = value_parsed[2]
+			dynamicNPCGeneratorSettings[NpcGender.Herm]["lenCMMax"] = value_parsed[3]
+			dynamicNPCGeneratorSettings[NpcGender.Shemale]["lenCMMin"] = value_parsed[4]
+			dynamicNPCGeneratorSettings[NpcGender.Shemale]["lenCMMax"] = value_parsed[5]
+
+		if(optionID == "dynamicNPCGeneratorSettingsBallsScale"):
+			dynamicNPCGeneratorSettings[NpcGender.Male]["ballsScaleMin"] = value_parsed[0]
+			dynamicNPCGeneratorSettings[NpcGender.Male]["ballsScaleMax"] = value_parsed[1]
+			dynamicNPCGeneratorSettings[NpcGender.Herm]["ballsScaleMin"] = value_parsed[2]
+			dynamicNPCGeneratorSettings[NpcGender.Herm]["ballsScaleMax"] = value_parsed[3]
+			dynamicNPCGeneratorSettings[NpcGender.Shemale]["ballsScaleMin"] = value_parsed[4]
+			dynamicNPCGeneratorSettings[NpcGender.Shemale]["ballsScaleMax"] = value_parsed[5]
+
+		if(optionID == "dynamicNPCGeneratorSettingsBreasts"):
+			dynamicNPCGeneratorSettings[NpcGender.Female]["breastsMin"] = value_parsed[0]
+			dynamicNPCGeneratorSettings[NpcGender.Female]["breastsMax"] = value_parsed[1]
+			dynamicNPCGeneratorSettings[NpcGender.Herm]["breastsMin"] = value_parsed[2]
+			dynamicNPCGeneratorSettings[NpcGender.Herm]["breastsMax"] = value_parsed[3]
+			dynamicNPCGeneratorSettings[NpcGender.Shemale]["breastsMin"] = value_parsed[4]
+			dynamicNPCGeneratorSettings[NpcGender.Shemale]["breastsMax"] = value_parsed[5]
+
 	if(categoryID == "alienInfestationSettings"):
 		if(optionID == "alienInfestationModEnabled"):
 			alienInfestationModEnabled = value
@@ -784,6 +1021,8 @@ func saveData():
 		"capacityPenisRatio": capacityPenisRatio,
 		"capacityModifier": capacityModifier,
 		"productionModifier": productionModifier,
+		"dynamicNPCGeneratorModEnabled": dynamicNPCGeneratorModEnabled,
+		"dynamicNPCGeneratorSettings": dynamicNPCGeneratorSettings,
 		"alienInfestationModEnabled": alienInfestationModEnabled,
 		"alienParasitesEnabled": alienParasitesEnabled,
 	}
@@ -827,6 +1066,57 @@ func loadData(data):
 	capacityPenisRatio = loadVar(data, "capacityPenisRatio", 0.25)
 	capacityModifier = loadVar(data, "capacityModifier", 1.0)
 	productionModifier = loadVar(data, "productionModifier", 2.0)
+	dynamicNPCGeneratorModEnabled = loadVar(data, "dynamicNPCGeneratorModEnabled", false)
+	dynamicNPCGeneratorSettings = loadVar(data, "dynamicNPCGeneratorSettings", {
+		NpcGender.Male: {
+			"thickMin": 0.0,
+			"thickMax": 100.0,
+			"femMin": 0.0,
+			"femMax": 100.0,
+			"lenCMMin": 15.0,
+			"lenCMMax": 20.0,
+			"ballsScaleMin": 1.0,
+			"ballsScaleMax": 2.0,
+		},
+		NpcGender.Female: {
+			"thickMin": 0.0,
+			"thickMax": 100.0,
+			"femMin": 0.0,
+			"femMax": 100.0,
+			"breastsMin": 3,
+			"breastsMax": 7,
+		},
+		NpcGender.Herm: {
+			"thickMin": 0.0,
+			"thickMax": 100.0,
+			"femMin": 0.0,
+			"femMax": 100.0,
+			"lenCMMin": 15.0,
+			"lenCMMax": 20.0,
+			"ballsScaleMin": 1.0,
+			"ballsScaleMax": 2.0,
+			"breastsMin": 3,
+			"breastsMax": 7,
+		},
+		NpcGender.Shemale: {
+			"thickMin": 0.0,
+			"thickMax": 100.0,
+			"femMin": 0.0,
+			"femMax": 100.0,
+			"lenCMMin": 15.0,
+			"lenCMMax": 20.0,
+			"ballsScaleMin": 1.0,
+			"ballsScaleMax": 2.0,
+			"breastsMin": 3,
+			"breastsMax": 7,
+		},
+		NpcGender.Peachboy: {
+			"thickMin": 0.0,
+			"thickMax": 100.0,
+			"femMin": 0.0,
+			"femMax": 100.0,
+		},
+	})
 	alienInfestationModEnabled = loadVar(data, "alienInfestationModEnabled", false)
 	alienParasitesEnabled = loadVar(data, "alienParasitesEnabled", false)
 

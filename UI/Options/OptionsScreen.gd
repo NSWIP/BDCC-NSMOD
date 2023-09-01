@@ -7,6 +7,7 @@ var optionCategoryCheckbox = preload("res://UI/Options/OptionCheckboxType.tscn")
 var optionCategoryList = preload("res://UI/Options/OptionListType.tscn")
 var optionCategoryFloat = preload("res://UI/Options/OptionFloatType.tscn")
 var optionCategoryInt = preload("res://UI/Options/OptionIntType.tscn")
+var optionCategoryText = preload("res://UI/Options/OptionTextType.tscn")
 var optionCategoryPriorityList = preload("res://UI/Options/OptionPriorityListType.tscn")
 signal onClosePressed
 
@@ -45,6 +46,8 @@ func updateOptions():
 				optionUIObject = optionCategoryInt.instance()
 			elif(optionType == "prioritylist"):
 				optionUIObject = optionCategoryPriorityList.instance()
+			elif(optionType == "text"):
+				optionUIObject = optionCategoryText.instance()
 			else:
 				optionUIObject = optionCategoryUnknown.instance()
 			

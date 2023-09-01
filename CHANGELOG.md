@@ -1,6 +1,20 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+
+## [0.0.2-alpha] - 2023-09-01
+### Added
+- Added a modification "Dynamic NPC generation settings", now you can change some of the most important Dynamic NPC Generation settings
+- Added a text type settings field
+- From now on there will be Linux builds
+- From now on there will be Android builds
+
+### Changed
+- nothing
+
+### Fixed
+- nothing
+
 ## [0.0.1-alpha] - 2023-09-01
 ### Added
 - Added a modification "Cum production settings", now you can have as much cum as you want, applies to the PC and all NPCs

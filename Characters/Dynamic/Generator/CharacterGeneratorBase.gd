@@ -325,6 +325,40 @@ func getRandomItemIDByTag(itemTag):
 		weights.append(itemRef.getItemWeightForNpcGeneration())
 	
 	return RNG.pickWeighted(itemIDs, weights)
+
+func applyDynamicNPCGeneratorModSettings(character:DynamicCharacter, _args = {}):
+	var settings = OPTIONS.getDynamicNPCGeneratorSettings()[character.getNpcGender()]
+
+	if(character.getNpcGender() == NpcGender.Male):
+		character.npcThickness = RNG.randf_range(settings["thickMin"], settings["thickMax"])
+		character.npcFeminity = RNG.randf_range(settings["femMin"], settings["femMax"])
+		character.getBodypart(BodypartSlot.Penis).lengthCM = RNG.randf_range(settings["lenCMMin"], settings["lenCMMax"])
+		character.getBodypart(BodypartSlot.Penis).ballsScale = RNG.randf_range(settings["ballsScaleMin"], settings["ballsScaleMax"])
+
+	elif(character.getNpcGender() == NpcGender.Female):
+		character.npcThickness = RNG.randf_range(settings["thickMin"], settings["thickMax"])
+		character.npcFeminity = RNG.randf_range(settings["femMin"], settings["femMax"])
+		character.getBodypart(BodypartSlot.Breasts).size = RNG.randi_range(settings["breastsMin"], settings["breastsMax"])
+	
+	elif(character.getNpcGender() == NpcGender.Herm):
+		character.npcThickness = RNG.randf_range(settings["thickMin"], settings["thickMax"])
+		character.npcFeminity = RNG.randf_range(settings["femMin"], settings["femMax"])
+		character.getBodypart(BodypartSlot.Penis).lengthCM = RNG.randf_range(settings["lenCMMin"], settings["lenCMMax"])
+		character.getBodypart(BodypartSlot.Penis).ballsScale = RNG.randf_range(settings["ballsScaleMin"], settings["ballsScaleMax"])
+		character.getBodypart(BodypartSlot.Breasts).size = RNG.randi_range(settings["breastsMin"], settings["breastsMax"])
+
+	elif(character.getNpcGender() == NpcGender.Shemale):
+		character.npcThickness = RNG.randf_range(settings["thickMin"], settings["thickMax"])
+		character.npcFeminity = RNG.randf_range(settings["femMin"], settings["femMax"])
+		character.getBodypart(BodypartSlot.Penis).lengthCM = RNG.randf_range(settings["lenCMMin"], settings["lenCMMax"])
+		character.getBodypart(BodypartSlot.Penis).ballsScale = RNG.randf_range(settings["ballsScaleMin"], settings["ballsScaleMax"])
+		character.getBodypart(BodypartSlot.Breasts).size = RNG.randi_range(settings["breastsMin"], settings["breastsMax"])
+
+	elif(character.getNpcGender() == NpcGender.Peachboy):
+		character.npcThickness = RNG.randf_range(settings["thickMin"], settings["thickMax"])
+		character.npcFeminity = RNG.randf_range(settings["femMin"], settings["femMax"])
+	
+	return
 		
 func generate(_args = {}):
 	var character = makeBase("dynamicnpc", _args)
@@ -345,6 +379,11 @@ func generate(_args = {}):
 	pickPersonality(character, _args)
 	applyArgs(character, _args) # Relies on fetishes and personality
 	pickEquipment(character, _args) # Relies on character type
+
+	# DynamicNPCGeneratorMod
+	if(OPTIONS.getDynamicNPCGeneratorModEnabled()):
+		applyDynamicNPCGeneratorModSettings(character, _args)
+
 	character.npcSmallDescription = pickSmallDescription(character, _args)
 	
 	character.resetEquipment()

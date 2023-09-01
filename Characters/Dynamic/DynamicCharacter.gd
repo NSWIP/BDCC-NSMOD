@@ -21,6 +21,9 @@ func _getName():
 
 func getGender():
 	return NpcGender.toNormalGender(npcGeneratedGender)
+
+func getNpcGender():
+	return npcGeneratedGender
 	
 func getPronounGender():
 	if(getGender() == Gender.Androgynous):

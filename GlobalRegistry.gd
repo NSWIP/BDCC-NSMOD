@@ -2,7 +2,7 @@ extends Node
 
 var game_version_major = 0
 var game_version_minor = 0
-var game_version_revision = 1
+var game_version_revision = 2
 var game_version_suffix = "-alpha"
 
 var currentUniqueID = 0
@@ -120,7 +120,7 @@ func checkModSupport():
 	# If we're in editor we have to do this silly thing
 	# read more here: https://github.com/godotengine/godot/issues/19815
 	if(OS.has_feature("editor")):
-		var _haveBase = ProjectSettings.load_resource_pack("res://BDCC.pck")
+		var _haveBase = ProjectSettings.load_resource_pack("res://BDCC-NSMOD.pck")
 		if(!_haveBase):
 			modsSupport = false
 			return
