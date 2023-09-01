@@ -46,11 +46,16 @@ var advancedShadersEnabled = true
 
 var autosaveEnabled = true
 
+# Cum Production Mod
 var cumProductionModEnabled = false
 var capacityBallsRatio = 1.0
 var capacityPenisRatio = 0.25
 var capacityModifier = 1.0
 var productionModifier = 2.0
+
+# Alien Infestation Mod
+var alienInfestationModEnabled = false
+var alienParasitesEnabled = false
 
 func resetToDefaults():
 	fetchNewRelease = true
@@ -88,6 +93,8 @@ func resetToDefaults():
 	capacityPenisRatio = 0.25
 	capacityModifier = 1.0
 	productionModifier = 2.0
+	alienInfestationModEnabled = false
+	alienParasitesEnabled = false
 	
 	enabledContent.clear()
 	for contentType in ContentType.getAll():
@@ -204,6 +211,12 @@ func getCapacityModifier():
 
 func getProductionModifier():
 	return productionModifier
+
+func getAlienInfestationModEnabled():
+	return alienInfestationModEnabled
+
+func getAlienParasitesEnabled():
+	return alienParasitesEnabled
 
 func getChangeableOptions():
 	var settings = [
@@ -565,14 +578,14 @@ func getModChangeableOptions():
 				},
 				{
 					"name": "Cum capacity balls ratio",
-					"description": "Change how much \"Balls Scale\" contribute to the cum capacity",
+					"description": "Change how much \"Balls Scale\" contributes to the cum capacity",
 					"id": "capacityBallsRatio",
 					"type": "float",
 					"value": capacityBallsRatio,
 				},
 				{
 					"name": "Cum capacity penis ratio",
-					"description": "Change how much \"Penis Length\" contribute to the cum capacity",
+					"description": "Change how much \"Penis Length\" contributes to the cum capacity",
 					"id": "capacityPenisRatio",
 					"type": "float",
 					"value": capacityPenisRatio,
@@ -592,7 +605,27 @@ func getModChangeableOptions():
 					"value": productionModifier,
 				},
 			]
-		}
+		},
+		{
+			"name": "Alien infestation settings (W.I.P.)",
+			"id": "alienInfestationSettings",
+			"options": [
+				{
+					"name": "Enable",
+					"description": "Enable this modification",
+					"id": "alienInfestationModEnabled",
+					"type": "checkbox",
+					"value": alienInfestationModEnabled,
+				},
+				{
+					"name": "Alien parasites",
+					"description": "Enable alien parasites",
+					"id": "alienParasitesEnabled",
+					"type": "float",
+					"value": alienParasitesEnabled,
+				},
+			]
+		},
 	]
 	
 	return settings
@@ -700,6 +733,12 @@ func applyOption(categoryID, optionID, value):
 		if(optionID == "productionModifier"):
 			productionModifier = value
 
+	if(categoryID == "alienInfestationSettings"):
+		if(optionID == "alienInfestationModEnabled"):
+			alienInfestationModEnabled = value
+		if(optionID == "alienParasitesEnabled"):
+			alienParasitesEnabled = value
+
 func applySettingsEffect():
 	if(shouldScaleUI):
 		get_tree().set_screen_stretch(SceneTree.STRETCH_MODE_2D,SceneTree.STRETCH_ASPECT_EXPAND,Vector2(1280,720), uiScaleMultiplier)
@@ -745,6 +784,8 @@ func saveData():
 		"capacityPenisRatio": capacityPenisRatio,
 		"capacityModifier": capacityModifier,
 		"productionModifier": productionModifier,
+		"alienInfestationModEnabled": alienInfestationModEnabled,
+		"alienParasitesEnabled": alienParasitesEnabled,
 	}
 	
 	return data
@@ -786,6 +827,8 @@ func loadData(data):
 	capacityPenisRatio = loadVar(data, "capacityPenisRatio", 0.25)
 	capacityModifier = loadVar(data, "capacityModifier", 1.0)
 	productionModifier = loadVar(data, "productionModifier", 2.0)
+	alienInfestationModEnabled = loadVar(data, "alienInfestationModEnabled", false)
+	alienParasitesEnabled = loadVar(data, "alienParasitesEnabled", false)
 
 func saveToFile():
 	var saveData = saveData()
