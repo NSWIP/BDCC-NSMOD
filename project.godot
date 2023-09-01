@@ -1364,7 +1364,7 @@ _global_script_class_icons={
 
 [application]
 
-config/name="BDCC"
+config/name="BDCC-NSMOD"
 run/main_scene="res://UI/LaunchScreen/LaunchScreen.tscn"
 config/project_settings_override="user://override.cfg"
 boot_splash/image="res://Images/Splash/splash.png"

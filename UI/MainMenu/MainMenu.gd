@@ -14,6 +14,7 @@ onready var devSubScreen = $HBoxContainer/DevToolsScreen/DevScreen
 onready var loadedModsLabel = $HBoxContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer/LoadedModsLabel
 onready var modsMenu = $HBoxContainer/ModsMenu
 onready var autoTranslatorMenu = $HBoxContainer/AutoTranslatorMenu
+onready var modOptionsGameTab = $HBoxContainer/ModOptionsScreen
 
 export(Resource) var GlobalTheme
 
@@ -59,6 +60,7 @@ func hideAllMenus():
 	$HBoxContainer/Panel2.visible = true
 	$HBoxContainer/Panel.visible = true
 	autoTranslatorMenu.visible = false
+	modOptionsGameTab.visible = false
 
 func switchToMainMenu():
 	hideAllMenus()
@@ -84,6 +86,10 @@ func _on_ResumeButton_pressed():
 func _on_OptionsButton_pressed():
 	hideAllMenus()
 	optionsGameTab.visible = true
+	
+func _on_ModOptionsButton_pressed():
+	hideAllMenus()
+	modOptionsGameTab.visible = true
 
 
 func _on_CreditsButton_pressed():
