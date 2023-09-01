@@ -92,10 +92,10 @@ func _on_CreditsButton_pressed():
 
 
 func _on_GithubButton_pressed():
-	var _ok = OS.shell_open("https://github.com/Alexofp/BDCC")
+	var _ok = OS.shell_open("https://github.com/NSWIP/BDCC-NSMOD")
 
 func getNewRelease():
-	var error = http_request.request("https://api.github.com/repos/Alexofp/BDCC/releases")
+	var error = http_request.request("https://api.github.com/repos/NSWIP/BDCC-NSMOD/releases")
 	if error != OK:
 		Log.printerr("[MainMenu] An error occurred in the HTTP request.")
 		gutHubReleaseLabel.text = "Latest github release: Error"
@@ -136,7 +136,7 @@ func _on_HTTPRequest_request_completed(result, _response_code, _headers, body):
 	gutHubReleaseLabel.text = "Latest github release: Nothing found"
 
 func _on_GithubReleasesButton_pressed():
-	var _ok = OS.shell_open("https://github.com/Alexofp/BDCC/releases")
+	var _ok = OS.shell_open("https://github.com/NSWIP/BDCC-NSMOD/releases")
 
 
 func _on_DevClose_pressed():
@@ -169,7 +169,7 @@ func _on_DiscordButton_pressed():
 	var _ok = OS.shell_open("https://discord.gg/7UGYBvQrc3")
 	
 func _on_ChangelogButton_pressed():
-	var _ok = OS.shell_open("https://github.com/Alexofp/BDCC/blob/main/CHANGELOG.md")
+	var _ok = OS.shell_open("https://github.com/NSWIP/BDCC-NSMOD/blob/main/CHANGELOG.md")
 
 
 func _on_DonationsLabel_meta_clicked(meta):
