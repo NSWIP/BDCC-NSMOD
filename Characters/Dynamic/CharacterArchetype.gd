@@ -14,6 +14,7 @@ const Drugger = "Drugger"
 const TestSubject = "TestSubject"
 const Breeder = "Breeder"
 const BreedingStock = "BreedingStock"
+const Custom = "Custom"
 
 static func getAll():
 	return [Top, ServiceTop, Bottom, PowerBottom, Dom, Sub, Switch, RopeBunny, Rigger, Drugger, TestSubject, Breeder, BreedingStock]
@@ -134,6 +135,8 @@ static func getFetishes(archType):
 				Fetish.VaginalSexReceiving : FetishInterest.Loves,
 				Fetish.AnalSexReceiving : FetishInterest.Likes,
 			}
+		Custom:
+			return OPTIONS.dynamicNPCGeneratorArchetypeSettings["customSettings"]
 	
 	return {}
 

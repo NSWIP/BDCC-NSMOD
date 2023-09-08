@@ -136,11 +136,19 @@ func pickBodyAttributes(character:DynamicCharacter, _args = {}):
 		character.npcFeminity = RNG.randi_range(0, 100)
 
 func pickArchetypes(character:DynamicCharacter, _args = {}):
+	if(OPTIONS.dynamicNPCGeneratorArchetypeSettings["onlyCustom"] && OPTIONS.dynamicNPCGeneratorModEnabled):
+		character.npcArchetypes = CharacterArchetype.Custom
+		return
+	
 	var possible = CharacterArchetype.getAll()
+	if(OPTIONS.dynamicNPCGeneratorModEnabled):
+		possible.append(OPTIONS.dynamicNPCGeneratorArchetypeSettings["customSettings"])
 	
 	var picked = []
 	
 	var amount = RNG.randi_range(2, 4)
+	if(OPTIONS.dynamicNPCGeneratorModEnabled):
+		amount = RNG.randi_range(OPTIONS.dynamicNPCGeneratorArchetypeSettings["minArchetypeAmount"], OPTIONS.dynamicNPCGeneratorArchetypeSettings["maxArchetypeAmount"])
 	for _i in range(amount):
 		picked.append(RNG.pick(possible))
 	character.npcArchetypes = picked

@@ -15,6 +15,7 @@ onready var loadedModsLabel = $HBoxContainer/Panel/MarginContainer/VBoxContainer
 onready var modsMenu = $HBoxContainer/ModsMenu
 onready var autoTranslatorMenu = $HBoxContainer/AutoTranslatorMenu
 onready var modOptionsGameTab = $HBoxContainer/ModOptionsScreen
+onready var nsmodUpdateNotification = $CenterContainer/NSMODUpdateNotification
 
 export(Resource) var GlobalTheme
 
@@ -134,6 +135,9 @@ func _on_HTTPRequest_request_completed(result, _response_code, _headers, body):
 		var time = Util.ISO8601DateToDatetime(release["published_at"])
 		
 		gutHubReleaseLabel.text = "Latest github release: "+release["tag_name"]
+		if(compareVersions(GlobalRegistry.getGameVersionString(), release["tag_name"]) == 1):
+			nsmodUpdateNotification.visible = true
+
 		if(time != null):
 			gutHubReleaseLabel.text += "\n" + Util.datetimeToRFC113(time)
 		
@@ -224,3 +228,37 @@ func _on_SexActivityCreator_pressed():
 	
 	var scene = load("res://Util/SexActivityCreator/SexActivityCreator.tscn")
 	devSubScreen.add_child(scene.instance())
+
+# Compares two versions
+# Returns: -1 if first is newer, 0 if equal, 1 if second is newer
+func compareVersions(var first: String, var second: String):
+	print(first + second)
+	var parsed = {
+		"first": {
+			"major": first.split(".")[0],
+			"minor": first.split(".")[1],
+			"revision": first.split(".")[2],
+		},
+		"second": {
+			"major": second.split(".")[0],
+			"minor": second.split(".")[1],
+			"revision": second.split(".")[2],
+		},
+	}
+
+	if(parsed["first"]["major"].to_int() < parsed["second"]["major"].to_int()):
+		return 1
+	elif(parsed["first"]["major"].to_int() > parsed["second"]["major"].to_int()):
+		return -1
+
+	if(parsed["first"]["minor"].to_int() < parsed["second"]["minor"].to_int()):
+		return 1
+	elif(parsed["first"]["minor"].to_int() > parsed["second"]["minor"].to_int()):
+		return -1
+	
+	if(parsed["first"]["revision"].to_int() < parsed["second"]["revision"].to_int()):
+		return 1
+	elif(parsed["first"]["revision"].to_int() > parsed["second"]["revision"].to_int()):
+		return -1
+
+	return 0

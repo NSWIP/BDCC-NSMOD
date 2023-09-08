@@ -18,5 +18,4 @@ This mod is fully compatible with modules for the base game, and also fully comp
 # TODO
 - Dynamic NPC fetish/likes generation settings [Suggestion]
 - Alien infestation modification
-- Bestiality modification [Suggestion]
 - Watersports expanded modification [Suggestion]

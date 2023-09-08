@@ -105,6 +105,37 @@ var dynamicNPCGeneratorSettings = {
 		"femMax": 100.0,
 	},
 }
+var dynamicNPCGeneratorArchetypeSettings = {
+	"minArchetypeAmount" : 2,
+	"maxArchetypeAmount" : 4,
+	"onlyCustom": false,
+	"customSettings": {
+		Fetish.AnalSexGiving: FetishInterest.Neutral,
+		Fetish.AnalSexReceiving: FetishInterest.Neutral,
+		Fetish.BeingBred: FetishInterest.Neutral,
+		Fetish.Breeding: FetishInterest.Neutral,
+		Fetish.Bodywritings: FetishInterest.Neutral,
+		Fetish.Bondage: FetishInterest.Neutral,
+		Fetish.Condoms: FetishInterest.Neutral,
+		Fetish.DrugUse: FetishInterest.Neutral,
+		Fetish.Exhibitionism: FetishInterest.Neutral,
+		Fetish.FeetplayGiving: FetishInterest.Neutral,
+		Fetish.FeetplayReceiving: FetishInterest.Neutral,
+		Fetish.Masochism: FetishInterest.Neutral,
+		Fetish.OralSexGiving: FetishInterest.Neutral,
+		Fetish.OralSexReceiving: FetishInterest.Neutral,
+		Fetish.Rigging: FetishInterest.Neutral,
+		Fetish.RimmingGiving: FetishInterest.Neutral,
+		Fetish.RimmingReceiving: FetishInterest.Neutral,
+		Fetish.Sadism: FetishInterest.Neutral,
+		Fetish.StraponSexAnal: FetishInterest.Neutral,
+		Fetish.StraponSexVaginal: FetishInterest.Neutral,
+		Fetish.Tribadism: FetishInterest.Neutral,
+		Fetish.UnconsciousSex: FetishInterest.Neutral,
+		Fetish.VaginalSexGiving: FetishInterest.Neutral,
+		Fetish.VaginalSexReceiving: FetishInterest.Neutral,
+	}
+}
 
 # Alien Infestation Modification
 var alienInfestationModEnabled = false
@@ -196,6 +227,37 @@ func resetToDefaults():
 			"femMin": 0.0,
 			"femMax": 100.0,
 		},
+	}
+	dynamicNPCGeneratorArchetypeSettings = {
+		"minArchetypeAmount" : 4,
+		"maxArchetypeAmount" : 4,
+		"onlyCustom": false,
+		"customSettings": {
+			Fetish.AnalSexGiving: FetishInterest.Neutral,
+			Fetish.AnalSexReceiving: FetishInterest.Neutral,
+			Fetish.BeingBred: FetishInterest.Neutral,
+			Fetish.Breeding: FetishInterest.Neutral,
+			Fetish.Bodywritings: FetishInterest.Neutral,
+			Fetish.Bondage: FetishInterest.Neutral,
+			Fetish.Condoms: FetishInterest.Neutral,
+			Fetish.DrugUse: FetishInterest.Neutral,
+			Fetish.Exhibitionism: FetishInterest.Neutral,
+			Fetish.FeetplayGiving: FetishInterest.Neutral,
+			Fetish.FeetplayReceiving: FetishInterest.Neutral,
+			Fetish.Masochism: FetishInterest.Neutral,
+			Fetish.OralSexGiving: FetishInterest.Neutral,
+			Fetish.OralSexReceiving: FetishInterest.Neutral,
+			Fetish.Rigging: FetishInterest.Neutral,
+			Fetish.RimmingGiving: FetishInterest.Neutral,
+			Fetish.RimmingReceiving: FetishInterest.Neutral,
+			Fetish.Sadism: FetishInterest.Neutral,
+			Fetish.StraponSexAnal: FetishInterest.Neutral,
+			Fetish.StraponSexVaginal: FetishInterest.Neutral,
+			Fetish.Tribadism: FetishInterest.Neutral,
+			Fetish.UnconsciousSex: FetishInterest.Neutral,
+			Fetish.VaginalSexGiving: FetishInterest.Neutral,
+			Fetish.VaginalSexReceiving: FetishInterest.Neutral,
+		}
 	}
 	alienInfestationModEnabled = false
 	alienParasitesEnabled = false
@@ -781,6 +843,13 @@ func getModChangeableOptions():
 						str(dynamicNPCGeneratorSettings[NpcGender.Herm]["breastsMin"]) + ":" + str(dynamicNPCGeneratorSettings[NpcGender.Herm]["breastsMax"]) + " " +
 						str(dynamicNPCGeneratorSettings[NpcGender.Shemale]["breastsMin"]) + ":" + str(dynamicNPCGeneratorSettings[NpcGender.Shemale]["breastsMax"]) + " "),
 				},
+				{
+					"name": "Fetish hates",
+					"description": "Change what fetishes will have this intrest value",
+					"id": "dynamicNPCGeneratorArchetypeSettingsHates",
+					"type": "text",
+					"value": str(dynamicNPCGeneratorArchetypeSettings["customSettings"].values()),
+				},
 			]
 		},
 		{
@@ -1023,6 +1092,7 @@ func saveData():
 		"productionModifier": productionModifier,
 		"dynamicNPCGeneratorModEnabled": dynamicNPCGeneratorModEnabled,
 		"dynamicNPCGeneratorSettings": dynamicNPCGeneratorSettings,
+		"dynamicNPCGeneratorArchetypeSettings": dynamicNPCGeneratorArchetypeSettings,
 		"alienInfestationModEnabled": alienInfestationModEnabled,
 		"alienParasitesEnabled": alienParasitesEnabled,
 	}
@@ -1116,6 +1186,37 @@ func loadData(data):
 			"femMin": 0.0,
 			"femMax": 100.0,
 		},
+	})
+	dynamicNPCGeneratorArchetypeSettings = loadVar(data, "dynamicNPCGeneratorArchetypeSettings", {
+		"minArchetypeAmount" : 4,
+		"maxArchetypeAmount" : 4,
+		"onlyCustom": false,
+		"customSettings": {
+			Fetish.AnalSexGiving: FetishInterest.Neutral,
+			Fetish.AnalSexReceiving: FetishInterest.Neutral,
+			Fetish.BeingBred: FetishInterest.Neutral,
+			Fetish.Breeding: FetishInterest.Neutral,
+			Fetish.Bodywritings: FetishInterest.Neutral,
+			Fetish.Bondage: FetishInterest.Neutral,
+			Fetish.Condoms: FetishInterest.Neutral,
+			Fetish.DrugUse: FetishInterest.Neutral,
+			Fetish.Exhibitionism: FetishInterest.Neutral,
+			Fetish.FeetplayGiving: FetishInterest.Neutral,
+			Fetish.FeetplayReceiving: FetishInterest.Neutral,
+			Fetish.Masochism: FetishInterest.Neutral,
+			Fetish.OralSexGiving: FetishInterest.Neutral,
+			Fetish.OralSexReceiving: FetishInterest.Neutral,
+			Fetish.Rigging: FetishInterest.Neutral,
+			Fetish.RimmingGiving: FetishInterest.Neutral,
+			Fetish.RimmingReceiving: FetishInterest.Neutral,
+			Fetish.Sadism: FetishInterest.Neutral,
+			Fetish.StraponSexAnal: FetishInterest.Neutral,
+			Fetish.StraponSexVaginal: FetishInterest.Neutral,
+			Fetish.Tribadism: FetishInterest.Neutral,
+			Fetish.UnconsciousSex: FetishInterest.Neutral,
+			Fetish.VaginalSexGiving: FetishInterest.Neutral,
+			Fetish.VaginalSexReceiving: FetishInterest.Neutral,
+		}
 	})
 	alienInfestationModEnabled = loadVar(data, "alienInfestationModEnabled", false)
 	alienParasitesEnabled = loadVar(data, "alienParasitesEnabled", false)

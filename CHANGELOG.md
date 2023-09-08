@@ -2,6 +2,17 @@
 All notable changes to this project will be documented in this file.
 
 
+## [0.0.3-pre-alpha] - 2023-09-08
+### Added
+- Added a new update notification popup to let the player know about an update being available
+- Started working on "Dynamic NPC archetype generation settings" [W.I.P.]
+
+### Changed
+- Changed the NSMOD icon to make it easier for Android players to differentiate between the base game and NSMOD
+
+### Fixed
+- Nothing
+
 ## [0.0.2-alpha] - 2023-09-01
 ### Added
 - Added a modification "Dynamic NPC generation settings", now you can change some of the most important Dynamic NPC Generation settings
