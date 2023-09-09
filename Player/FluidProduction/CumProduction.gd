@@ -7,7 +7,7 @@ func getCapacity() -> float:
 	var ballsScale = penis.getBallsScale();
 	
 	if(OPTIONS.getCumProductionModEnabled()):
-		return round((20.0 * (ballsScale * 10.0 * OPTIONS.getCapacityBallsRatio())^2 + 20.0 * (penisLength * OPTIONS.getCapacityPenisratio())^2) * OPTIONS.getCapacityModifier())
+		return round((20.0 * pow((ballsScale * 10.0 * OPTIONS.getCapacityBallsRatio()), 2) + 20.0 * pow((penisLength * OPTIONS.getCapacityPenisRatio()), 2)) * OPTIONS.getCapacityModifier())
 	
 	return round(50.0 + pow(penisLength, 2.0))
 

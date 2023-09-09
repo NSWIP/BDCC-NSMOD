@@ -384,6 +384,32 @@ func getDynamicNPCGeneratorModEnabled():
 func getDynamicNPCGeneratorSettings():
 	return dynamicNPCGeneratorSettings
 
+func getDynamicNPCGeneratorArchetypeSettings():
+	return dynamicNPCGeneratorArchetypeSettings
+
+func getDynamicNPCGeneratorArchetypeSettingsDisplay(var row: String):
+	var out = ""
+	var intrest = {
+		FetishInterest.Hates: [],
+		FetishInterest.ReallyDislikes: [],
+		FetishInterest.Dislikes: [],
+		FetishInterest.SlightlyDislikes: [],
+		FetishInterest.Neutral: [],
+		FetishInterest.SlightlyLikes: [],
+		FetishInterest.Likes: [],
+		FetishInterest.ReallyLikes: [],
+		FetishInterest.Loves: [],
+	}
+	for entry in getDynamicNPCGeneratorArchetypeSettings()["customSettings"].keys():
+		intrest[getDynamicNPCGeneratorArchetypeSettings()["customSettings"].get(entry)].push_back(entry)
+
+	for entry in intrest[row]:
+		if(out == ""):
+			out += str(entry)
+		else:
+			out += str(" " + entry)
+	return out + " "
+
 func getAlienInfestationModEnabled():
 	return alienInfestationModEnabled
 
@@ -844,11 +870,88 @@ func getModChangeableOptions():
 						str(dynamicNPCGeneratorSettings[NpcGender.Shemale]["breastsMin"]) + ":" + str(dynamicNPCGeneratorSettings[NpcGender.Shemale]["breastsMax"]) + " "),
 				},
 				{
+					"name": "Min archetype count",
+					"description": "Change the lowest amount of archetypes a character can have",
+					"id": "dynamicNPCGeneratorArchetypeSettingsMinArchetypeCount",
+					"type": "int",
+					"value": dynamicNPCGeneratorArchetypeSettings["minArchetypeAmount"],
+				},
+				{
+					"name": "Max archetype count",
+					"description": "Change the highest amount of archetypes a character can have",
+					"id": "dynamicNPCGeneratorArchetypeSettingsMaxArchetypeCount",
+					"type": "int",
+					"value": dynamicNPCGeneratorArchetypeSettings["maxArchetypeAmount"],
+				},
+				{
+					"name": "Only custom archetype",
+					"description": "Any dynamic NPC will have only the custom archetype",
+					"id": "dynamicNPCGeneratorArchetypeSettingsOnlyCustomArchetype",
+					"type": "checkbox",
+					"value": dynamicNPCGeneratorArchetypeSettings["onlyCustom"],
+				},
+				{
 					"name": "Fetish hates",
 					"description": "Change what fetishes will have this intrest value",
 					"id": "dynamicNPCGeneratorArchetypeSettingsHates",
 					"type": "text",
-					"value": str(dynamicNPCGeneratorArchetypeSettings["customSettings"].values()),
+					"value": getDynamicNPCGeneratorArchetypeSettingsDisplay(FetishInterest.Hates),
+				},
+				{
+					"name": "Fetish really dislikes",
+					"description": "Change what fetishes will have this intrest value",
+					"id": "dynamicNPCGeneratorArchetypeSettingsReallyDislikes",
+					"type": "text",
+					"value": getDynamicNPCGeneratorArchetypeSettingsDisplay(FetishInterest.ReallyDislikes),
+				},
+				{
+					"name": "Fetish dislikes",
+					"description": "Change what fetishes will have this intrest value",
+					"id": "dynamicNPCGeneratorArchetypeSettingsDislikes",
+					"type": "text",
+					"value": getDynamicNPCGeneratorArchetypeSettingsDisplay(FetishInterest.Dislikes),
+				},
+				{
+					"name": "Fetish slightly dislikes",
+					"description": "Change what fetishes will have this intrest value",
+					"id": "dynamicNPCGeneratorArchetypeSettingsSlightlyDislikes",
+					"type": "text",
+					"value": getDynamicNPCGeneratorArchetypeSettingsDisplay(FetishInterest.SlightlyDislikes),
+				},
+				{
+					"name": "Fetish neutral",
+					"description": "Change what fetishes will have this intrest value",
+					"id": "dynamicNPCGeneratorArchetypeSettingsNeutral",
+					"type": "text",
+					"value": getDynamicNPCGeneratorArchetypeSettingsDisplay(FetishInterest.Neutral),
+				},
+				{
+					"name": "Fetish slightly likes",
+					"description": "Change what fetishes will have this intrest value",
+					"id": "dynamicNPCGeneratorArchetypeSettingsSlightlyLikes",
+					"type": "text",
+					"value": getDynamicNPCGeneratorArchetypeSettingsDisplay(FetishInterest.SlightlyLikes),
+				},
+				{
+					"name": "Fetish likes",
+					"description": "Change what fetishes will have this intrest value",
+					"id": "dynamicNPCGeneratorArchetypeSettingsLikes",
+					"type": "text",
+					"value": getDynamicNPCGeneratorArchetypeSettingsDisplay(FetishInterest.Likes),
+				},
+				{
+					"name": "Fetish really likes",
+					"description": "Change what fetishes will have this intrest value",
+					"id": "dynamicNPCGeneratorArchetypeSettingsReallyLikes",
+					"type": "text",
+					"value": getDynamicNPCGeneratorArchetypeSettingsDisplay(FetishInterest.ReallyLikes),
+				},
+				{
+					"name": "Fetish loves",
+					"description": "Change what fetishes will have this intrest value",
+					"id": "dynamicNPCGeneratorArchetypeSettingsLoves",
+					"type": "text",
+					"value": getDynamicNPCGeneratorArchetypeSettingsDisplay(FetishInterest.Loves),
 				},
 			]
 		},
@@ -983,13 +1086,14 @@ func applyOption(categoryID, optionID, value):
 		if(optionID == "dynamicNPCGeneratorModEnabled"):
 			dynamicNPCGeneratorModEnabled = value
 			return
-
+		
 		var value_parsed = []
-		var splits = value.split(" ", false, 0)
+		if(optionID.begins_with("dynamicNPCGeneratorSettings")):
+			var splits = value.split(" ", false, 0)
 	
-		for gender in splits:
-			value_parsed.push_back(float(gender.split(":")[0]))
-			value_parsed.push_back(float(gender.split(":")[1]))
+			for gender in splits:
+				value_parsed.push_back(float(gender.split(":")[0]))
+				value_parsed.push_back(float(gender.split(":")[1]))
 		
 		if(optionID == "dynamicNPCGeneratorSettingsThick"):
 			dynamicNPCGeneratorSettings[NpcGender.Male]["thickMin"] = value_parsed[0]
@@ -1038,6 +1142,16 @@ func applyOption(categoryID, optionID, value):
 			dynamicNPCGeneratorSettings[NpcGender.Herm]["breastsMax"] = value_parsed[3]
 			dynamicNPCGeneratorSettings[NpcGender.Shemale]["breastsMin"] = value_parsed[4]
 			dynamicNPCGeneratorSettings[NpcGender.Shemale]["breastsMax"] = value_parsed[5]
+
+		elif(optionID == "dynamicNPCGeneratorArchetypeSettingsMinArchetypeCount" || optionID == "dynamicNPCGeneratorArchetypeSettingsMaxArchetypeCount"):
+			dynamicNPCGeneratorArchetypeSettings[optionID.replace("dynamicNPCGeneratorArchetypeSettings", "").replace("M", "m").replace("Count", "Amount")] = value
+		elif(optionID == "dynamicNPCGeneratorArchetypeSettingsOnlyCustomArchetype"):
+			dynamicNPCGeneratorArchetypeSettings["onlyCustom"] = value
+		elif(optionID.begins_with("dynamicNPCGeneratorArchetypeSettings")):
+			var intrest = optionID.replace("dynamicNPCGeneratorArchetypeSettings", "")
+			for entry in value.split(" "):
+				dynamicNPCGeneratorArchetypeSettings["customSettings"][entry] = intrest
+			
 
 	if(categoryID == "alienInfestationSettings"):
 		if(optionID == "alienInfestationModEnabled"):

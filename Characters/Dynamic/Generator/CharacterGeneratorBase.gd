@@ -137,7 +137,7 @@ func pickBodyAttributes(character:DynamicCharacter, _args = {}):
 
 func pickArchetypes(character:DynamicCharacter, _args = {}):
 	if(OPTIONS.dynamicNPCGeneratorArchetypeSettings["onlyCustom"] && OPTIONS.dynamicNPCGeneratorModEnabled):
-		character.npcArchetypes = CharacterArchetype.Custom
+		character.npcArchetypes = [CharacterArchetype.Custom]
 		return
 	
 	var possible = CharacterArchetype.getAll()
@@ -173,9 +173,9 @@ func pickFetishes(character:DynamicCharacter, _args = {}):
 			var maxInterest = fetishes[fetishID]
 			var maxInterestNumber = FetishInterest.interestToNumber(maxInterest)
 			if(maxInterestNumber > 0):
-				fetishHolder.addFetish(fetishID, FetishInterest.numberToInterest(RNG.randi_range(1, maxInterestNumber)))
+				fetishHolder.setFetish(fetishID, FetishInterest.numberToInterest(RNG.randi_range(maxInterestNumber - 2, maxInterestNumber)))
 			elif(maxInterestNumber < -1):
-				fetishHolder.addFetish(fetishID, FetishInterest.numberToInterest(-RNG.randi_range(1, -maxInterestNumber)))
+				fetishHolder.setFetish(fetishID, FetishInterest.numberToInterest(-RNG.randi_range(-maxInterestNumber - 2, -maxInterestNumber)))
 	
 	fetishHolder.removeImpossibleFetishes()
 

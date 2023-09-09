@@ -237,12 +237,12 @@ func compareVersions(var first: String, var second: String):
 		"first": {
 			"major": first.split(".")[0],
 			"minor": first.split(".")[1],
-			"revision": first.split(".")[2],
+			"revision": first.split(".")[2].split("-")[0],
 		},
 		"second": {
 			"major": second.split(".")[0],
 			"minor": second.split(".")[1],
-			"revision": second.split(".")[2],
+			"revision": second.split(".")[2].split("-")[0],
 		},
 	}
 

@@ -1,6 +1,19 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## [0.1.0] - 2023-09-10
+### Added
+- Finished the "Dynamic NPC archetype generation settings" modification
+
+### Changed
+- Changed how fetish intrests are calculated
+- Changed version comparing for the update notification system
+
+### Fixed
+- Nothing
+
+## [Versioning Change] - 2023-09-10
+### from now on the format will be "release"."beta"."preview", so 2.1.3 is release 2 beta update 1 preview 3
 
 ## [0.0.3-pre-alpha] - 2023-09-08
 ### Added
