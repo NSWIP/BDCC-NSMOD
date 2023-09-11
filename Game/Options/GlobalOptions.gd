@@ -1149,7 +1149,7 @@ func applyOption(categoryID, optionID, value):
 			dynamicNPCGeneratorArchetypeSettings["onlyCustom"] = value
 		elif(optionID.begins_with("dynamicNPCGeneratorArchetypeSettings")):
 			var intrest = optionID.replace("dynamicNPCGeneratorArchetypeSettings", "")
-			for entry in value.split(" "):
+			for entry in value.split(" ", false):
 				dynamicNPCGeneratorArchetypeSettings["customSettings"][entry] = intrest
 			
 

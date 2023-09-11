@@ -1,7 +1,11 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
-## [0.1.0] - 2023-09-10
+## [0.1.1-hotfix] - 2023-09-11
+### Fixed
+- Fixed game crash when there were two spaces in a row in a text field, reported on discord
+
+## [0.1.0-beta] - 2023-09-10
 ### Added
 - Finished the "Dynamic NPC archetype generation settings" modification
 
